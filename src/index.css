@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Font heritage: Cormorant Garamond (display serif) + Plus Jakarta Sans (body, karya desainer Indonesia) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ── Palet Batik Heritage — warna pewarna alam wastra + tingkatan (Nature Distilled) ── */
+@theme {
+  /* Latar & permukaan */
+  --color-mori: #f7f3e8;        /* kain mori (latar utama) */
+  --color-mori-deep: #efe7d4;   /* mori lebih tua (section berselang) */
+  --color-paper: #fbf8f0;       /* kertas hangat (kartu/permukaan) */
+
+  /* Nila / indigo — primer & teks */
+  --color-nila: #24305e;
+  --color-nila-deep: #1a2347;
+  --color-nila-soft: #3a4a82;
+
+  /* Soga / cokelat — sekunder hangat */
+  --color-soga: #7b4b2a;
+  --color-soga-deep: #5e3820;
+  --color-soga-soft: #9c6a44;
+
+  /* Kunyit / kuning kunyit — aksen & CTA */
+  --color-kunyit: #e0a526;
+  --color-kunyit-deep: #b5811a;  /* varian kontras-aman untuk teks di atas mori */
+  --color-kunyit-soft: #f2cd7a;
+
+  /* Terracotta — aksen kriya pendukung (Nature Distilled) */
+  --color-tanah: #c67b5c;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ── Dasar ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-mori);
+  color: var(--color-nila);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Judul heritage: serif dengan optical sizing */
+.font-display {
+  font-feature-settings: 'liga' 1, 'dlig' 1;
+  letter-spacing: -0.01em;
+}
+
+/* ── Tekstur grain halus (handmade warmth) ── */
+.texture-grain {
+  position: relative;
+}
+.texture-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ── Latar motif kawung (dari public/batik-pattern.svg diwarnai per konteks) ── */
+.motif-kawung {
+  background-image: url('/batik-pattern.svg');
+  background-size: 150px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Reveal on load (dipakai hero & section) */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
